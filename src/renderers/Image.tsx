@@ -22,7 +22,17 @@ export const ImageRenderer: Renderer = ({ story, action, isPaused, config }) => 
     <WithHeader {...{ story, globalHeader: config.header }}>
       <WithSeeMore {...{ story, action }}>
         <div>
-          <Image style={computedStyles} src={story.url} onLoad={imageLoaded} alt={story.alt}/>
+          <Image 
+            style={computedStyles} 
+            src={story.url} 
+            onLoad={imageLoaded} 
+            alt={story.alt}
+            layout={story.layout || "fill"}
+            objectFit={story.objectFit || "cover"}
+            placeholder="blur"
+            blurDataURL={story.url}
+            loading={story.loading || "eager"}
+          />
           {!loaded && (
             <div
               style={{
@@ -31,7 +41,7 @@ export const ImageRenderer: Renderer = ({ story, action, isPaused, config }) => 
                 position: "absolute",
                 left: 0,
                 top: 0,
-                background: "rgba(0, 0, 0, 0.9)",
+                background: "rgba(1, 1, 1)",
                 zIndex: 9,
                 display: "flex",
                 justifyContent: "center",

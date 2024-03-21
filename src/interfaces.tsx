@@ -110,6 +110,9 @@ export interface StoryState {
 export interface Story {
   url: string;
   alt: string;
+  layout: string;
+  objectFit: string;
+  loading: "eager" | "lazy";
   seeMore?: React.ComponentType<{
     close: () => void;
   }>;

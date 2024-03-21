@@ -54,6 +54,9 @@ const generateStories = (stories: Story[], renderers: { renderer: Renderer, test
         let story: Story = {
             url: '',
             alt: '',
+            layout: '',
+            objectFit: '',
+            loading: 'eager'
         };
 
         if (typeof s === 'string') {
