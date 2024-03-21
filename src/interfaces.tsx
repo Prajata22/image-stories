@@ -29,6 +29,8 @@ export interface ReactInstaStoriesProps {
   preventDefault?: boolean;
   preloadCount?: number;
   alt: string;
+  layout: string;
+  objectFit: string;
 }
 
 export interface GlobalCtx {
@@ -59,6 +61,8 @@ export interface GlobalCtx {
   preventDefault?: boolean;
   preloadCount?: number;
   alt: string;
+  layout: string;
+  objectFit: string;
 }
 
 type NumberOrString = number | string;

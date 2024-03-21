@@ -81,7 +81,7 @@ export const VideoRenderer: Renderer = ({
                 position: "absolute",
                 left: 0,
                 top: 0,
-                background: "rgba(1, 1, 1, 1)",
+                background: "#fff",
                 zIndex: 9,
                 display: "flex",
                 justifyContent: "center",

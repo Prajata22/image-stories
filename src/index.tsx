@@ -33,14 +33,20 @@ const ReactInstaStories = function (props: ReactInstaStoriesProps) {
         keyboardNavigation: props.keyboardNavigation,
         preventDefault: props.preventDefault,
         preloadCount: props.preloadCount,
-        alt: props.alt
+        alt: props.alt,
+        layout: props.layout,
+        objectFit: props.objectFit,
     }
-    const [stories, setStories] = useState<{ stories: Story[] }>({ stories: generateStories(props.stories, renderers, props.alt) });
 
+    const [stories, setStories] = useState<{ stories: Story[] }>({ stories: generateStories(
+        props.stories, renderers, props.alt, props.layout, props.objectFit
+    ) });
 
     useEffect(() => {
-        setStories({ stories: generateStories(props.stories, renderers, props.alt) });
-    }, [props.stories, props.renderers, props.alt]);
+        setStories({ stories: generateStories(
+            props.stories, renderers, props.alt, props.layout, props.objectFit
+        ) });
+    }, [props.stories, props.renderers, props.alt, props.layout, props.objectFit]);
 
     return <GlobalContext.Provider value={context}>
         <StoriesContext.Provider value={stories}>
@@ -49,20 +55,33 @@ const ReactInstaStories = function (props: ReactInstaStoriesProps) {
     </GlobalContext.Provider>
 }
 
-const generateStories = (stories: Story[], renderers: { renderer: Renderer, tester: Tester }[], alt = "image") => {
-    return stories.map(s => {
+const generateStories = (stories: Story[], 
+    renderers: { renderer: Renderer, tester: Tester }[], 
+    alt = "image",
+    layout = "fill",
+    objectFit = "cover",
+) => {
+    return stories.map((s, index) => {
         let story: Story = {
             url: '',
-            alt: '',
-            layout: '',
-            objectFit: '',
-            loading: 'eager'
+            alt: alt,
+            layout: layout,
+            objectFit: objectFit,
+            loading: "eager",
         };
 
         if (typeof s === 'string') {
             story.url = s;
             story.alt = alt;
+            story.layout = layout;
+            story.objectFit = objectFit;
             story.type = 'image';
+
+            if(index === 0) {
+                story.loading = "eager";
+            } else {
+                story.loading = "lazy"
+            }
         } else if (typeof s === 'object') {
             story = Object.assign(story, s);
         }
