@@ -6,6 +6,8 @@ export const initialContext = {
 	width: 360,
 	height: 640,
 	alt: 'image',
+	layout: 'fill',
+	objectFit: 'cover',
 };
 
 const GlobalContext = React.createContext<GlobalCtx>(initialContext);
